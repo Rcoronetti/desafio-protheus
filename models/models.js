@@ -34,7 +34,7 @@ Acao.init({
   },
 }, {
   sequelize,
-  modelName: 'acaos',
+  modelName: 'acoes',
   freezeTableName: true,
 });
 
@@ -91,27 +91,17 @@ Cotacao.init({
   }, 
 }, {
   sequelize,
-  modelName: 'cotacaos',
+  modelName: 'cotacoes',
   freezeTableName: true,
 });
 
 
 // Definição do relacionamento entre Acao e Cotacao
 Acao.hasMany(Cotacao, {
-  foreignKey: 'idacao'
+  foreignKey: 'idacao',
 });
 Cotacao.belongsTo(Acao, {
   foreignKey: 'idacao'
 });
 
 export { Acao, Cotacao };
-
-
-
-
-
-
-
-
-
-
