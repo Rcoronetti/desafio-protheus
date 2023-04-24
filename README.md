@@ -2,6 +2,9 @@
 Repositório do desafio protheus para a UNOESC-Joaçaba
 
 **Criar tabelas no banco de dados(postgres):**
+
+Base de dados: protheus
+
 ```sql
 -- Criação da tabela 'acoes'
 CREATE TABLE acoes (
