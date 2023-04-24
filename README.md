@@ -46,11 +46,16 @@ node route
 ```
 Obs: deixe o servidor rodando para poder vizualizar os dados na pagina web.
 
-**Para rodar a pagina web**
-
+**Para rodar a pagina web:**
 
 ```
 npm run dev
 ```
+**Para rodar o teste, se necessário:**
+
+```
+node teste
+```
+
 
 
