@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
+import moment from 'moment';
 
 const Home = () => {
   const [acoes, setAcoes] = useState([]);
@@ -8,12 +9,9 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        console.log('chegou')
-      const response = await axios.get('http://localhost:3000/api/acoes');  
-      console.log(response)  
-      setAcoes(response.data);
-      console.log('passou')
+      try {       
+      const response = await axios.get('http://localhost:3000/api/acoes');      
+      setAcoes(response.data);     
     } catch (error) {
       console.log(error);
       setError('Erro ao carregar dados');
@@ -38,21 +36,25 @@ const Home = () => {
       name: 'Data',
       selector: 'cotacoes[0].data',
       sortable: true,
+      format: row => moment(row.createdAt).format('DD/MM/YYYY'),
     },
     {
       name: 'Cotação',
       selector: 'cotacoes[0].cotacao',
       sortable: true,
+      format: row => row.cotacoes.length> 0 && row.cotacoes[0].cotacao ? row.cotacoes[0].cotacao.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }):'',
     },
     {
       name: 'Valor de Mercado',
       selector: 'cotacoes[0].valormercado',
       sortable: true,
+      format: row =>row.cotacoes.length >0 && row.cotacoes[0].valormercado ? row.cotacoes[0].valormercado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }):'',
     },
     {
       name: 'Volume de Transações',
       selector: 'cotacoes[0].volumetransacoes',
       sortable: true,
+      format: row=> row.cotacoes.length >0 ? row.cotacoes[0].volumetransacoes:null
     },
   ];
 
