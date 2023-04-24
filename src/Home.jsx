@@ -4,6 +4,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import Papa from 'papaparse';
 
 
 
@@ -11,6 +12,30 @@ const Home = () => {
   const [acoes, setAcoes] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+
+
+  const downloadCsv = () => {
+    const dataToDownload = acoes.flatMap(({cotacoes, ...rest}) => (
+      cotacoes.map(({idcotacao, idacao, valormercado, volumetransacoes, moeda}) => ({        
+        valormercado,
+        volumetransacoes,
+        moeda,
+        ...rest,
+      }))
+    ));
+    const csvData = Papa.unparse(dataToDownload);
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'acoes.csv');
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,6 +109,8 @@ const Home = () => {
           overflowY={true}
         />
       )}
+      <button onClick={downloadCsv}>Baixar CSV</button>
+
     </div>
   );
 };
