@@ -51,7 +51,7 @@ Obs: deixe o servidor rodando para poder vizualizar os dados na pagina web.
 ```
 npm run dev
 ```
-**Para rodar o teste:**
+**Para rodar o teste, se necessário:**
 
 ```
 node teste
