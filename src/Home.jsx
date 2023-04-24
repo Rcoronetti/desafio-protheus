@@ -5,6 +5,7 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Papa from 'papaparse';
+import { dataTableStyle } from './DataTableStyle';
 
 
 
@@ -125,7 +126,7 @@ const Home = () => {
       <div>
         <input type="text" value={symbolFilter} onChange={handleSymbolFilterChange} placeholder="Filtrar por símbolo" />
         <button onClick={handleSymbolFilter}>Filtrar</button>
-        <button onClick={handleClearFilter}>Limpar Filtro</button>
+        <button onClick={handleClearFilter} style={{marginBottom:'15px'}}>Limpar Filtro</button>
       </div>
       {loading ? (
         <div className="loading">
@@ -141,6 +142,7 @@ const Home = () => {
           pagination={true}
           paginationPerPage={10}
           overflowY={true}
+          customStyles={dataTableStyle}
         />
       )}
       <button onClick={downloadCsv}>Baixar CSV</button>
