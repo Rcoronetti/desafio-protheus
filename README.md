@@ -39,7 +39,18 @@ CREATE TABLE cotacoes (
 ```
 node index
 ```
+**Para rodar o servidor:**
+
+```
+node route
+```
+Obs: deixe o servidor rodando para poder vizualizar os dados na pagina web.
+
+**Para rodar a pagina web**
 
 
+```
+npm run dev
+```
 
 
