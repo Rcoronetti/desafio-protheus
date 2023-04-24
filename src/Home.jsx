@@ -143,6 +143,11 @@ const Home = () => {
           paginationPerPage={10}
           overflowY={true}
           customStyles={dataTableStyle}
+          paginationComponentOptions={{
+                    rowsPerPageText: 'Registros por página',
+                    rangeSeparatorText: 'de',
+                  }}
+
         />
       )}
       <button onClick={downloadCsv}>Baixar CSV</button>
