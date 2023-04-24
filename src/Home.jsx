@@ -12,6 +12,34 @@ const Home = () => {
   const [acoes, setAcoes] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+  const [symbolFilter, setSymbolFilter] = useState('');
+
+
+  const handleSymbolFilterChange = event => {
+    setSymbolFilter(event.target.value);
+  };
+
+  const handleSymbolFilter = () => {
+    const filteredData = acoes.filter(acoes => acoes.simbolo.toLowerCase().includes(symbolFilter.toLowerCase()));
+    setAcoes(filteredData);
+  };
+
+  const handleClearFilter = () => {
+    setSymbolFilter('');
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('http://localhost:3000/api/acoes');
+        setAcoes(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setError('Erro ao carregar dados');
+      }
+    };
+    fetchData();
+  };
+
 
 
   const downloadCsv = () => {
@@ -54,6 +82,7 @@ const Home = () => {
  
 
   const columns = [
+    
     {
       name: 'Simbolo',
       selector: 'simbolo',
@@ -93,6 +122,11 @@ const Home = () => {
   return (
     <div>
       <h1>Ações</h1>
+      <div>
+        <input type="text" value={symbolFilter} onChange={handleSymbolFilterChange} placeholder="Filtrar por símbolo" />
+        <button onClick={handleSymbolFilter}>Filtrar</button>
+        <button onClick={handleClearFilter}>Limpar Filtro</button>
+      </div>
       {loading ? (
         <div className="loading">
         <h5>Carregando dados...</h5>
