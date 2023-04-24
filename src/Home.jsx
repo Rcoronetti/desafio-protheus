@@ -3,6 +3,8 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import moment from 'moment';
 
+
+
 const Home = () => {
   const [acoes, setAcoes] = useState([]);
   const [error, setError] = useState('');
