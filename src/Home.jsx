@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 
 
 const Home = () => {
   const [acoes, setAcoes] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {       
+        setLoading(true)
       const response = await axios.get('http://localhost:3000/api/acoes');      
-      setAcoes(response.data);     
+      setAcoes(response.data);  
+        setLoading(false)   
     } catch (error) {
       console.log(error);
       setError('Erro ao carregar dados');
@@ -63,7 +68,12 @@ const Home = () => {
   return (
     <div>
       <h1>Ações</h1>
-      {error ? (
+      {loading ? (
+        <div className="loading">
+        <h5>Carregando dados...</h5>
+          <FontAwesomeIcon icon={faSpinner} spin />
+        </div>
+      ) : error ? (
         <div>{error}</div>
       ) : (
         <DataTable
