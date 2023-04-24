@@ -34,6 +34,11 @@ CREATE TABLE cotacoes (
 ```
  npm install
  ```
+***Após clone, execute o código abaixo para popular o banco de dados consumindo a Api:***
+
+```
+node index
+```
 
 
 
